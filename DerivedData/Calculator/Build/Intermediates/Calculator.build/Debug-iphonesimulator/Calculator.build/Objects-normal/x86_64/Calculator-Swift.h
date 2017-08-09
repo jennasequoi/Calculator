@@ -161,6 +161,7 @@ SWIFT_CLASS("_TtC10Calculator14ViewController")
 @interface ViewController : UIViewController
 @property (nonatomic, weak) IBOutlet UILabel * _Null_unspecified display;
 - (IBAction)touchDigit:(UIButton * _Nonnull)sender;
+@property (nonatomic) double displayValue;
 - (IBAction)performOperation:(UIButton * _Nonnull)sender;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;

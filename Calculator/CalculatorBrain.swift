@@ -22,7 +22,7 @@ class CalculatorBrain {
         "e" : Operation.Constant(M_E),
         "√" : Operation.UnaryOperation(sqrt),
         "cos" : Operation.UnaryOperation(cos),
-        "x" : Operation.BinaryOperation({ $0 * $1 }),
+        "×" : Operation.BinaryOperation({ $0 * $1 }),
         "÷" : Operation.BinaryOperation({ $0 / $1 }),
         "+" : Operation.BinaryOperation({ $0 + $1 }),
         "-" : Operation.BinaryOperation({ $0 - $1 }),

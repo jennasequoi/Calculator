@@ -1,7 +1,0 @@
-version: "Apple Swift version 3.1 (swiftlang-802.0.53 clang-802.0.42)"
-options: "e30995fd28be18505d3166751f7ee5e8"
-build_time: [555587520, 566328000]
-inputs:
-  "/Users/brownj45/workspace/playground/stanford/Calculator/Calculator/CalculatorBrain.swift": [555587520, 0]
-  "/Users/brownj45/workspace/playground/stanford/Calculator/Calculator/ViewController.swift": [555587104, 0]
-  "/Users/brownj45/workspace/playground/stanford/Calculator/Calculator/AppDelegate.swift": [554999566, 0]

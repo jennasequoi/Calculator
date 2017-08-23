@@ -22,6 +22,9 @@ class CalculatorBrain {
         "e" : Operation.Constant(M_E),
         "√" : Operation.UnaryOperation(sqrt),
         "cos" : Operation.UnaryOperation(cos),
+        "sin" : Operation.UnaryOperation(sin),
+        "tan" : Operation.UnaryOperation(tan),
+        "c" : Operation.Clear,
         "×" : Operation.BinaryOperation({ $0 * $1 }),
         "÷" : Operation.BinaryOperation({ $0 / $1 }),
         "+" : Operation.BinaryOperation({ $0 + $1 }),
@@ -34,6 +37,7 @@ class CalculatorBrain {
         case UnaryOperation((Double) -> Double)
         case BinaryOperation((Double,Double) -> Double)
         case Equals
+        case Clear
     }
     
     func performOperation(symbol: String){
@@ -45,6 +49,7 @@ class CalculatorBrain {
                 executePendingBinaryOperation()
                 pending = PendingBinaryOperationInfo(binaryFunction:  function, firstOperand: accumulator)
             case .Equals: executePendingBinaryOperation()
+            case .Clear: resetAll()
             }
         }
         
@@ -56,6 +61,11 @@ class CalculatorBrain {
             accumulator = pending!.binaryFunction(pending!.firstOperand, accumulator)
             pending = nil
         }
+    }
+    
+    private func resetAll() {
+        accumulator = 0.0
+        pending = nil
     }
     
     private var pending: PendingBinaryOperationInfo?

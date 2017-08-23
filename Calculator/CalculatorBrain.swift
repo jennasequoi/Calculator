@@ -11,6 +11,7 @@ import Foundation
 class CalculatorBrain {
     
     private var accumulator = 0.0
+    private var memory = 0.0
     
     func setOperand(operand: Double){
         accumulator = operand
@@ -24,6 +25,9 @@ class CalculatorBrain {
         "cos" : Operation.UnaryOperation(cos),
         "sin" : Operation.UnaryOperation(sin),
         "tan" : Operation.UnaryOperation(tan),
+        "m+" : Operation.MemoryAdd,
+        "m-" : Operation.MemoryMinus,
+        "mr" : Operation.MemoryRecall,
         "c" : Operation.Clear,
         "×" : Operation.BinaryOperation({ $0 * $1 }),
         "÷" : Operation.BinaryOperation({ $0 / $1 }),
@@ -38,6 +42,9 @@ class CalculatorBrain {
         case BinaryOperation((Double,Double) -> Double)
         case Equals
         case Clear
+        case MemoryAdd
+        case MemoryMinus
+        case MemoryRecall
     }
     
     func performOperation(symbol: String){
@@ -50,6 +57,9 @@ class CalculatorBrain {
                 pending = PendingBinaryOperationInfo(binaryFunction:  function, firstOperand: accumulator)
             case .Equals: executePendingBinaryOperation()
             case .Clear: resetAll()
+            case .MemoryAdd: memory += accumulator
+            case .MemoryMinus: memory -= accumulator
+            case .MemoryRecall: accumulator = memory
             }
         }
         

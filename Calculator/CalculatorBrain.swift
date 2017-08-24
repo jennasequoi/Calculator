@@ -12,10 +12,11 @@ class CalculatorBrain {
     
     private var accumulator = 0.0
     private var memory = 0.0
+    private var description = ""
     
     func setOperand(operand: Double){
         accumulator = operand
-        
+        addToDescription(symbol: String(operand))
     }
     
     private var operations: Dictionary<String, Operation> = [
@@ -28,6 +29,7 @@ class CalculatorBrain {
         "m+" : Operation.MemoryAdd,
         "m-" : Operation.MemoryMinus,
         "mr" : Operation.MemoryRecall,
+        "mc" : Operation.MemoryClear,
         "c" : Operation.Clear,
         "×" : Operation.BinaryOperation({ $0 * $1 }),
         "÷" : Operation.BinaryOperation({ $0 / $1 }),
@@ -45,6 +47,7 @@ class CalculatorBrain {
         case MemoryAdd
         case MemoryMinus
         case MemoryRecall
+        case MemoryClear
     }
     
     func performOperation(symbol: String){
@@ -60,7 +63,9 @@ class CalculatorBrain {
             case .MemoryAdd: memory += accumulator
             case .MemoryMinus: memory -= accumulator
             case .MemoryRecall: accumulator = memory
+            case .MemoryClear: memory = 0.0
             }
+            addToDescription(symbol: symbol)
         }
         
     }
@@ -76,6 +81,13 @@ class CalculatorBrain {
     private func resetAll() {
         accumulator = 0.0
         pending = nil
+        description = ""
+    }
+    
+    private func addToDescription(symbol: String){
+        if symbol != "=" && symbol != "."{
+            description = description + " " + symbol
+        }
     }
     
     private var pending: PendingBinaryOperationInfo?
@@ -87,7 +99,9 @@ class CalculatorBrain {
     
     var result: Double {
         get{
+            print(description)
             return accumulator
+       
         }
     }
 }

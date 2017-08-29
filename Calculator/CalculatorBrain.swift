@@ -12,7 +12,8 @@ class CalculatorBrain {
     
     private var accumulator = 0.0
     private var memory = 0.0
-    private var description = ""
+    var description = ""
+    private var isPartialResult = false;
     
     func setOperand(operand: Double){
         accumulator = operand
@@ -58,6 +59,7 @@ class CalculatorBrain {
             case .BinaryOperation(let function):
                 executePendingBinaryOperation()
                 pending = PendingBinaryOperationInfo(binaryFunction:  function, firstOperand: accumulator)
+                isPartialResult = true
             case .Equals: executePendingBinaryOperation()
             case .Clear: resetAll()
             case .MemoryAdd: memory += accumulator
@@ -75,6 +77,7 @@ class CalculatorBrain {
         if pending != nil {
             accumulator = pending!.binaryFunction(pending!.firstOperand, accumulator)
             pending = nil
+            isPartialResult = false
         }
     }
     
@@ -82,6 +85,7 @@ class CalculatorBrain {
         accumulator = 0.0
         pending = nil
         description = ""
+        isPartialResult = false
     }
     
     private func addToDescription(symbol: String){

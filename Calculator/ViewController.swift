@@ -40,12 +40,22 @@ class ViewController: UIViewController {
             @IBAction func performOperation(_ sender: UIButton) {
         if userIsInTheMiddleOfTyping {
             brain.setOperand(operand: displayValue)
+            updateSequenceDisplay()
+            sequenceDisplay.text = brain.description
             userIsInTheMiddleOfTyping = false
         }
         if let mathematicalSymbol = sender.currentTitle {
             brain.performOperation(symbol: mathematicalSymbol)
+            updateSequenceDisplay()
         }
         displayValue = brain.result
     }
+    
+    func updateSequenceDisplay(){
+        if brain.isPartialResult || brain.description == " "{
+            sequenceDisplay.text = brain.description + "..."
+        }else{
+            sequenceDisplay.text = brain.description + " ="
+        }
+    }
 }
-

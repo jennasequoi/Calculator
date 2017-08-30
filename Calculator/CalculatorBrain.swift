@@ -13,11 +13,12 @@ class CalculatorBrain {
     private var accumulator = 0.0
     private var memory = 0.0
     var description = ""
-    private var isPartialResult = false;
+    var isPartialResult = false;
     
     func setOperand(operand: Double){
         accumulator = operand
         addToDescription(symbol: String(operand))
+        print(description)
     }
     
     private var operations: Dictionary<String, Operation> = [
@@ -84,13 +85,14 @@ class CalculatorBrain {
     private func resetAll() {
         accumulator = 0.0
         pending = nil
-        description = ""
+        description = " "
         isPartialResult = false
     }
     
     private func addToDescription(symbol: String){
-        if symbol != "=" && symbol != "."{
-            description = description + " " + symbol
+        if symbol != "=" && symbol != "." && symbol != "c"{
+            description = self.description + " " + symbol
+            print(self.description)
         }
     }
     
